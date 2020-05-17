@@ -20,7 +20,52 @@ void intro(void);
 void coustomer_details(void);
 void menu(void);
 void order(void);
+int main()
+{
+	FILE *N;
+N=fopen("Order_Details.txt","w");
+fclose(N);
+int i;
+char z;
+	intro();
+	coustomer_details();
+	system("cls");
+	rto:
+	menu();
+	printf("\n     -------------------------------------------------------------------------------");
+	OP:
+	printf("\n     For going back to menu press 'M' for billing press 'B': ");
+	scanf(" %c",&z);
+	if(z=='M')
+	{
+			printf("\n     ");
+		for(i=0;i<72;i++)
+		{
+			 delay(1900000);
+			 printf("\xB2");
+		}
+		goto rto;
+	}
+		
+	else if(z=='B')
+	{
+			printf("\n     ");
+		for(i=0;i<72;i++)
+		{
+			 delay(1900000);
+			 printf("\xB2");
+		}
+	system("cls");
+	order();
+    }
+    else
+    {
+    	printf("\n     Wrong Entry Please Try Again");
+    	goto OP;
+	}
 
+		return 0;
+}
 void delay(int j)
 {
   int i;
@@ -63,6 +108,8 @@ for(i=0;i<1;i++)
 void coustomer_details()
 {
 	FILE *p;
+	FILE *G;
+	G=fopen("Coustomer permanent detals.txt","a");
 	p=fopen("Coustomer detail.txt","w");
 	if(p==NULL)
 	{
@@ -85,7 +132,9 @@ scanf("%s",name);
  scanf("%s",mailid);fflush(stdin);
  
  fprintf(p,"%s %s %s",mobile_Number,name,mailid);
+ fprintf(G,"%s\n %s\n %s\n",mobile_Number,name,mailid);
  fclose(p);
+ fclose(G);
  printf("\n\n                                   ");
  for(i=0;i<40;i++)
  {
@@ -168,7 +217,7 @@ typedef struct item{
 void THALI()
 {   
     system("cls");
-    int i,number1,quantity1;
+    int number1,quantity1;
     char symbol1;
     float cost1;
 	printf("\n\n\n\n     ");
@@ -190,39 +239,30 @@ void THALI()
 	back1:
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number1);
+	if(number1>3)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back1;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity1);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N'");
 	scanf(" %c",&symbol1);
 	cost1=(quantity1)*a[number1-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",a[number1-1].dish,quantity1,cost1);
+	fprintf(N,"%s %d %f\n",a[number1-1].dish,quantity1,cost1);
 	fclose(N);
 	if(symbol1=='+')
 	{
 		goto back1;
 	}
-	/*else if(symbol1=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
-    
+	  
 }
 void BEVERAGES_And_SHAKES()
 {
 	 system("cls");
-    int i,number2,quantity2;
+    int number2,quantity2;
     char symbol2;
     float cost2;
 	printf("\n\n\n\n     ");
@@ -263,33 +303,24 @@ void BEVERAGES_And_SHAKES()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number2);
+	if(number2>10)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back2;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity2);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol2);
 	cost2=(quantity2)*b[number2-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",b[number2-1].dish,quantity2,cost2);
+	fprintf(N,"%s %d %f\n",b[number2-1].dish,quantity2,cost2);
 	fclose(N);
 	if(symbol2=='+')
 	{
 		goto back2;
-	}
-	/*else if(symbol2=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
+	}	
 }
 void PIZZA_SPECIAL()
 {
@@ -323,34 +354,24 @@ void PIZZA_SPECIAL()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number3);
+	if(number3>6)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back3;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity3);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol3);
 	cost3=(quantity3)*c[number3-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",c[number3-1].dish,quantity3,cost3);
+	fprintf(N,"%s %d %f\n",c[number3-1].dish,quantity3,cost3);
 	fclose(N);
 	if(symbol3=='+')
 	{
 		goto back3;
-	}
-	/*else if(symbol3=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
-	
+	}	
 }
 void BURGER()
 {
@@ -378,33 +399,24 @@ void BURGER()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number4);
+	if(number4>4)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back4;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity4);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol4);
 	cost4=(quantity4)*d[number4-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",d[number4-1].dish,quantity4,cost4);
+	fprintf(N,"%s %d %f\n",d[number4-1].dish,quantity4,cost4);
 	fclose(N);
 	if(symbol4=='+')
 	{
 		goto back4;
 	}
-	/*else if(symbol4=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
 }
 void NOODLES()
 {
@@ -432,33 +444,24 @@ void NOODLES()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number5);
+		if(number5>4)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back5;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity5);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol5);
 	cost5=(quantity5)*e[number5-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",e[number5-1].dish,quantity5,cost5);
+	fprintf(N,"%s %d %f\n",e[number5-1].dish,quantity5,cost5);
 	fclose(N);
 	if(symbol5=='+')
 	{
 		goto back5;
-	}
-	/*else if(symbol5=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
+	}	
 }
 void SOUTH_INDIAN()
 {
@@ -489,33 +492,24 @@ void SOUTH_INDIAN()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number6);
+	if(number6>5)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back6;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity6);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol6);
 	cost6=(quantity6)*f[number6-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",f[number6-1].dish,quantity6,cost6);
+	fprintf(N,"%s %d %f\n",f[number6-1].dish,quantity6,cost6);
 	fclose(N);
 	if(symbol6=='+')
 	{
 		goto back6;
-	}
-	/*else if(symbol6=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
+	}		
 }
 void SOUPS()
 {
@@ -546,33 +540,24 @@ void SOUPS()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number7);
+		if(number7>5)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back7;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity7);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol7);
 	cost7=(quantity7)*g[number7-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",g[number7-1].dish,quantity7,cost7);
+	fprintf(N,"%s %d %f\n",g[number7-1].dish,quantity7,cost7);
 	fclose(N);
 	if(symbol7=='+')
 	{
 		goto back7;
-	}
-	/*else if(symbol7=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
+	}	
 }
 void STARTERS()
 {
@@ -612,33 +597,24 @@ void STARTERS()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number8);
+		if(number8>8)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back8;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity8);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol8);
 	cost8=(quantity8)*h[number8-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",h[number8-1].dish,quantity8,cost8);
+	fprintf(N,"%s %d %f\n",h[number8-1].dish,quantity8,cost8);
 	fclose(N);
 	if(symbol8=='+')
 	{
 		goto back8;
 	}
-	/*else if(symbol8=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
 }
 void MAIN_COURSE()		
 {
@@ -649,7 +625,7 @@ void MAIN_COURSE()
 	printf("\n\n\n\n     ");
 	printf("MAIN COURSE");
 	printf("\n     ========================================================================\n");
-	item j[10];
+	item j[13];
 	strcpy(j[0].dish,"Fry_Dal");
 	j[0].price=60.00;
 	strcpy(j[1].dish,"Mix_Veg.");
@@ -693,29 +669,24 @@ void MAIN_COURSE()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number9);
+		if(number9>13)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back9;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity9);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol9);
 	cost9=(quantity9)*j[number9-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",j[number9-1].dish,quantity9,cost9);
+	fprintf(N,"%s %d %f\n",j[number9-1].dish,quantity9,cost9);
 	fclose(N);
 	if(symbol9=='+')
 	{
 		goto back9;
-	}
-/*	else if(symbol9=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}*/
+	}	
 }
 void BREAD_AND_RICE()
 {
@@ -761,29 +732,24 @@ void BREAD_AND_RICE()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number10);
+		if(number10>10)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back10;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity10);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol10);
 	cost10=(quantity10)*k[number10-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",k[number10-1].dish,quantity10,cost10);
+	fprintf(N,"%s %d %f\n",k[number10-1].dish,quantity10,cost10);
 	fclose(N);
 	if(symbol10=='+')
 	{
 		goto back10;
-	}
-	/*else if(symbol10=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}*/	
+	}	
 }
 void DESERTS()
 {
@@ -811,73 +777,58 @@ void DESERTS()
 	printf("\n     -------------------------------------------------------------------------");
 	printf("\n\n     Please enter your choice number:");
 	scanf("%d",&number11);
+	if(number11>4)
+	{
+		printf("\n     No such type Choice Available Try Again");
+		goto back11;
+	}
 	printf("\n     Please enter quantity:");
 	scanf("%d",&quantity11);
-	printf("\n     For adding more item press '+' for heading back to main menu press 'B':");
+	printf("\n     For adding more item press '+' For not press 'N':");
 	scanf(" %c",&symbol11);
 	cost11=(quantity11)*l[number11-1].price;
 	FILE *N;
     N=fopen("Order_Details.txt","a");
-	fprintf(N,"%s  %d  %.2f\n",l[number11-1].dish,quantity11,cost11);
+	fprintf(N,"%s %d %f",l[number11-1].dish,quantity11,cost11);
 	fclose(N);
 	if(symbol11=='+')
 	{
 		goto back11;
 	}
-/*	else if(symbol11=='B')
-	{
-		printf("\n     ");
-		for(i=0;i<72;i++)
-		{
-			 delay(1000000);
-			 printf("\xB2");
-		}
-		menu();
-	}
-	else
-	{
-		printf("Done");
-	}*/	
 }			
 void order()
-{   
- printf("hello"); 
+{ 
+    float sum=0;
+	float gst;
+	float total;
+	char name[30];
+    char mobile_Number[10];
+    char mailid[50];  
     system("color 0E");
 	printf("\n\n\n\n     ");
 	printf("Order");
 	printf("\n     ========================================================================\n");
-	FILE *R;
-	char D[40];
-	int Q;
-	float  P;
-	R=fopen("Order_Details.txt","r");
-/*	while(fscanf(R,"%s  %d  %.2f",D,&Q,&P)!=EOF)
-	{
-		printf("       %s\n",D);
-		printf("         Quantity-%d\n",Q);
-		printf("          cost:%f",P);
-	}*/
-	getch();
-	fclose(R);
-}
-int main()
-{
 	FILE *N;
-N=fopen("Order_Details.txt","w");
-fclose(N);
-int z;
-//	intro();
-	//coustomer_details();
-	system("cls");
-	rto:
-	menu();
-	printf("for going back to menu press 1");
-	scanf("%d",&z);
-	if(z==1)
+	N=fopen("Order_Details.txt","r");
+	char dish[40];
+	int quant;
+	float price;
+	while(fscanf(N,"%s %d %f",dish,&quant,&price)!=EOF)
 	{
-		goto rto;
+	sum=sum+price;	
+	printf("\n     *  %s\n         Quantity-%d   Price-%.2f",dish,quant,price);
 	}
-	system("cls");
-	order();
-	return 0;
+	printf("\n     -------------------------------------------------------------------------\n");
+	gst=(sum*5)/100;
+	total=sum+gst;
+	printf("\n           GST-%.2f\n           Total-%.2f\n\n",gst,total);
+	fclose(N);
+	printf("            ");
+	FILE *p=fopen("Coustomer detail.txt","r");
+    while(fscanf(p,"%s %s %s",mobile_Number,name,mailid)!=EOF)
+    {
+     printf(" Thanku %s Please Visit Again !!! :)",name);
+    }
+	getch();
+
 }
